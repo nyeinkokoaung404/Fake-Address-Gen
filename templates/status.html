@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Dev Address API Status</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #333333;
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #10b981);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .telegram-icon {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+        }
+        #address-output {
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container mx-auto px-4 py-8">
+        <!-- Title -->
+        <h1 class="text-5xl md:text-6xl font-bold text-center gradient-text mb-8">
+            Smart Dev Address Generator API
+        </h1>
+
+        <!-- Developer Info -->
+        <div class="flex justify-center items-center mb-12">
+            <p class="text-2xl font-semibold text-gray-700">
+                Developed By <span class="text-blue-600">Abir Arafat Chawdhury</span>
+            </p>
+            <img src="https://kurigram.live/assets/pyro.gif" alt="Pyro GIF" class="w-16 h-16 ml-4">
+        </div>
+
+        <!-- API Status -->
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-4">API Status</h2>
+            <p id="api-status" class="text-xl font-medium text-gray-600">
+                Checking...
+            </p>
+        </div>
+
+<!-- Address Generator -->
+<div class="mb-12">
+    <h2 class="text-3xl font-semibold text-gray-800 text-center mb-6">
+        Generate Fake Address
+    </h2>
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-6">
+        <select id="country-select" class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="" disabled selected>Select a country</option>
+            <option value="AF">Afghanistan (AF)</option>
+            <option value="AL">Albania (AL)</option>
+            <option value="AI">Anguilla (AI)</option>
+            <option value="AQ">Antarctica (AQ)</option>
+            <option value="AM">Armenia (AM)</option>
+            <option value="AD">Andorra (AD)</option>
+            <option value="AG">Antigua and Barbuda (AG)</option>
+            <option value="AW">Aruba (AW)</option>
+            <option value="BS">Bahamas (BS)</option>
+            <option value="BB">Barbados (BB)</option>
+            <option value="BY">Belarus (BY)</option>
+            <option value="BZ">Belize (BZ)</option>
+            <option value="BJ">Benin (BJ)</option>
+            <option value="BA">Bosnia and Herzegovina (BA)</option>
+            <option value="BW">Botswana (BW)</option>
+            <option value="BN">Brunei Darussalam (BN)</option>
+            <option value="CV">Cabo Verde (CV)</option>
+            <option value="CF">Central African Republic (CF)</option>
+            <option value="TD">Chad (TD)</option>
+            <option value="KM">Comoros (KM)</option>
+            <option value="CG">Congo (CG)</option>
+            <option value="CD">Congo, Democratic Republic of the (CD)</option>
+            <option value="CR">Costa Rica (CR)</option>
+            <option value="HR">Croatia (HR)</option>
+            <option value="CU">Cuba (CU)</option>
+            <option value="CY">Cyprus (CY)</option>
+            <option value="CZ">Czechia (CZ)</option>
+            <option value="DJ">Djibouti (DJ)</option>
+            <option value="DM">Dominica (DM)</option>
+            <option value="DO">Dominican Republic (DO)</option>
+            <option value="EC">Ecuador (EC)</option>
+            <option value="SV">El Salvador (SV)</option>
+            <option value="ER">Eritrea (ER)</option>
+            <option value="EE">Estonia (EE)</option>
+            <option value="SZ">Eswatini (SZ)</option>
+            <option value="FJ">Fiji (FJ)</option>
+            <option value="GA">Gabon (GA)</option>
+            <option value="GM">Gambia (GM)</option>
+            <option value="GN">Guinea (GN)</option>
+            <option value="GW">Guinea-Bissau (GW)</option>
+            <option value="GY">Guyana (GY)</option>
+            <option value="HT">Haiti (HT)</option>
+            <option value="HU">Hungary (HU)</option>
+            <option value="JM">Jamaica (JM)</option>
+            <option value="KI">Kiribati (KI)</option>
+            <option value="KW">Kuwait (KW)</option>
+            <option value="KG">Kyrgyzstan (KG)</option>
+            <option value="LA">Lao People's Democratic Republic (LA)</option>
+            <option value="LV">Latvia (LV)</option>
+            <option value="LS">Lesotho (LS)</option>
+            <option value="LR">Liberia (LR)</option>
+            <option value="LI">Liechtenstein (LI)</option>
+            <option value="LT">Lithuania (LT)</option>
+            <option value="LU">Luxembourg (LU)</option>
+            <option value="MG">Madagascar (MG)</option>
+            <option value="MW">Malawi (MW)</option>
+            <option value="ML">Mali (ML)</option>
+            <option value="MT">Malta (MT)</option>
+            <option value="MH">Marshall Islands (MH)</option>
+            <option value="FM">Micronesia, Federated States of (FM)</option>
+            <option value="MD">Moldova, Republic of (MD)</option>
+            <option value="MN">Mongolia (MN)</option>
+            <option value="MZ">Mozambique (MZ)</option>
+            <option value="NA">Namibia (NA)</option>
+            <option value="NI">Nicaragua (NI)</option>
+            <option value="PW">Palau (PW)</option>
+            <option value="PG">Papua New Guinea (PG)</option>
+            <option value="PY">Paraguay (PY)</option>
+            <option value="RW">Rwanda (RW)</option>
+            <option value="KN">Saint Kitts and Nevis (KN)</option>
+            <option value="LC">Saint Lucia (LC)</option>
+            <option value="VC">Saint Vincent and the Grenadines (VC)</option>
+            <option value="WS">Samoa (WS)</option>
+            <option value="SC">Seychelles (SC)</option>
+            <option value="SO">Somalia (SO)</option>
+            <option value="SR">Suriname (SR)</option>
+            <option value="SY">Syrian Arab Republic (SY)</option>
+            <option value="TJ">Tajikistan (TJ)</option>
+            <option value="TL">Timor-Leste (TL)</option>
+            <option value="TG">Togo (TG)</option>
+            <option value="TO">Tonga (TO)</option>
+            <option value="TM">Turkmenistan (TM)</option>
+            <option value="TV">Tuvalu (TV)</option>
+            <option value="UZ">Uzbekistan (UZ)</option>
+            <option value="VU">Vanuatu (VU)</option>
+            <option value="ZM">Zambia (ZM)</option>
+            <option value="ZW">Zimbabwe (ZW)</option>
+                    <option value="AR">Argentina (AR)</option>
+                    <option value="AU">Australia (AU)</option>
+                    <option value="AT">Austria (AT)</option>
+                    <option value="AZ">Azerbaijan (AZ)</option>
+                    <option value="BD">Bangladesh (BD)</option>
+                    <option value="BH">Bahrain (BH)</option>
+                    <option value="BE">Belgium (BE)</option>
+                    <option value="BM">Bermuda (BM)</option>
+                    <option value="BT">Bhutan (BT)</option>
+                    <option value="BO">Bolivia (BO)</option>
+                    <option value="BR">Brazil (BR)</option>
+                    <option value="BG">Bulgaria (BG)</option>
+                    <option value="CA">Canada (CA)</option>
+                    <option value="KH">Cambodia (KH)</option>
+                    <option value="CM">Cameroon (CM)</option>
+                    <option value="CL">Chile (CL)</option>
+                    <option value="CN">China (CN)</option>
+                    <option value="CO">Colombia (CO)</option>
+                    <option value="CZ">Czechia (CZ)</option>
+                    <option value="DK">Denmark (DK)</option>
+                    <option value="DZ">Algeria (DZ)</option>
+                    <option value="EG">Egypt (EG)</option>
+                    <option value="FI">Finland (FI)</option>
+                    <option value="FR">France (FR)</option>
+                    <option value="GE">Georgia (GE)</option>
+                    <option value="DE">Germany (DE)</option>
+                    <option value="GH">Ghana (GH)</option>
+                    <option value="GR">Greece (GR)</option>
+                    <option value="GL">Greenland (GL)</option>
+                    <option value="GT">Guatemala (GT)</option>
+                    <option value="HK">Hong Kong (HK)</option>
+                    <option value="IS">Iceland (IS)</option>
+                    <option value="IN">India (IN)</option>
+                    <option value="ID">Indonesia (ID)</option>
+                    <option value="IQ">Iraq (IQ)</option>
+                    <option value="IE">Ireland (IE)</option>
+                    <option value="IL">Israel (IL)</option>
+                    <option value="IT">Italy (IT)</option>
+                    <option value="JP">Japan (JP)</option>
+                    <option value="JO">Jordan (JO)</option>
+                    <option value="KZ">Kazakhstan (KZ)</option>
+                    <option value="KE">Kenya (KE)</option>
+                    <option value="KR">South Korea (KR)</option>
+                    <option value="LB">Lebanon (LB)</option>
+                    <option value="LK">Sri Lanka (LK)</option>
+                    <option value="MA">Morocco (MA)</option>
+                    <option value="MY">Malaysia (MY)</option>
+                    <option value="MX">Mexico (MX)</option>
+                    <option value="MM">Myanmar (MM)</option>
+                    <option value="MV">Maldives (MV)</option>
+                    <option value="MR">Mauritania (MR)</option>
+                    <option value="NE">Niger (NE)</option>
+                    <option value="NG">Nigeria (NG)</option>
+                    <option value="NO">Norway (NO)</option>
+                    <option value="NP">Nepal (NP)</option>
+                    <option value="NZ">New Zealand (NZ)</option>
+                    <option value="OM">Oman (OM)</option>
+                    <option value="PK">Pakistan (PK)</option>
+                    <option value="PA">Panama (PA)</option>
+                    <option value="PE">Peru (PE)</option>
+                    <option value="PH">Philippines (PH)</option>
+                    <option value="PL">Poland (PL)</option>
+                    <option value="PT">Portugal (PT)</option>
+                    <option value="SL">Sierra Leone (SL)</option>
+                    <option value="QA">Qatar (QA)</option>
+                    <option value="RO">Romania (RO)</option>
+					<option value="RO">Liberland (LL)</option>
+					<option value="RO">Azawad (AZW)</option>
+					<option value="RO">Western Sahara (SADR)</option>
+                    <option value="RU">Russia (RU)</option>
+                    <option value="SA">Saudi Arabia (SA)</option>
+                    <option value="SG">Singapore (SG)</option>
+                    <option value="ZA">South Africa (ZA)</option>
+                    <option value="ES">Spain (ES)</option>
+                    <option value="SD">Sudan (SD)</option>
+                    <option value="SE">Sweden (SE)</option>
+                    <option value="CH">Switzerland (CH)</option>
+                    <option value="TW">Taiwan (TW)</option>
+                    <option value="TZ">Tanzania (TZ)</option>
+                    <option value="TH">Thailand (TH)</option>
+                    <option value="TR">Turkiye (TR)</option>
+                    <option value="UG">Uganda (UG)</option>
+                    <option value="UA">Ukraine (UA)</option>
+                    <option value="AE">United Arab Emirates (AE)</option>
+                    <option value="GB">United Kingdom (GB)</option>
+                    <option value="US">United States (US)</option>
+                    <option value="VE">Venezuela (VE)</option>
+                    <option value="VN">Vietnam (VN)</option>
+                    <option value="YE">Yemen (YE)</option>
+                    <option value="PMR">Transnistria (PMR)</option>
+                    <option value="NKR">Nagorno-Karabakh (NKR)</option>
+                    <option value="RA">Abkhazia (RA)</option>
+                    <option value="RSO">South Ossetia (RSO)</option>
+                    <option value="SLD">Somaliland (SLD)</option>
+                    <option value="TRNC">Northern Cyprus (TRNC)</option>
+                    <option value="AZW">Azawad (AZW)</option>
+                    <option value="LL">Liberland (LL)</option>
+                    <option value="SADR">Western Sahara (SADR)</option>
+                    <option value="PS">Sealand (PS)</option>
+					<option value="MC">Monaco (MC)</option> 
+                    <option value="SM">San Marino (SM)</option>
+                </select>
+                <button id="generate-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                    Generate Address
+                </button>
+            </div>
+            <div id="address-output" class="bg-gray-50 p-4 rounded-lg shadow-sm text-gray-700 text-center">
+                Select a country and click "Generate Address" to see a random address.
+            </div>
+        </div>
+
+        <!-- API Endpoints -->
+        <div class="mb-12">
+            <h2 class="text-3xl font-semibold text-gray-800 text-center mb-6">
+                API Endpoints
+            </h2>
+            <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                <h3 class="text-xl font-semibold text-gray-700 mb-4">GET /api/address</h3>
+                <p class="text-gray-600 mb-2"><strong>Description:</strong> Generates a random fake address for the specified country.</p>
+                <p class="text-gray-600 mb-2"><strong>Query Parameters:</strong></p>
+                <ul class="list-disc list-inside text-gray-600 mb-4">
+                    <li><code>code</code>: The country code (e.g., US, UK, BD). Required.</li>
+                </ul>
+                <p class="text-gray-600 mb-2"><strong>Example Request:</strong></p>
+                <pre class="bg-gray-100 p-2 rounded text-sm text-gray-700">curl -X GET "https://api.example.com/api/address?code=US"</pre>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-4">GET /api/countries</h3>
+                <p class="text-gray-600 mb-2"><strong>Description:</strong> Retrieves a list of supported countries and their country codes.</p>
+                <p class="text-gray-600 mb-2"><strong>Example Request:</strong></p>
+                <pre class="bg-gray-100 p-2 rounded text-sm text-gray-700">curl -X GET "https://api.example.com/api/countries"</pre>
+            </div>
+        </div>
+
+        <!-- Response Examples -->
+        <div class="mb-12">
+            <h2 class="text-3xl font-semibold text-gray-800 text-center mb-6">
+                Response Examples
+            </h2>
+            <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                <h3 class="text-xl font-semibold text-gray-700 mb-4">Successful Response</h3>
+                <pre class="bg-gray-100 p-2 rounded text-sm text-gray-700">
+{
+  "street_address": "123 Main Street",
+  "street_name": "Main Street",
+  "building_number": "123",
+  "city": "New York",
+  "state": "New York",
+  "postal_code": "10001",
+  "country": "United States",
+  "country_code": "US",
+  "currency": "USD",
+  "person_name": "James Carter",
+  "gender": "Male",
+  "phone_number": "+12125550123"
+}
+                </pre>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-4">Error Response</h3>
+                <pre class="bg-gray-100 p-2 rounded text-sm text-gray-700">
+{
+  "error": "Invalid country code"
+}
+                </pre>
+            </div>
+        </div>
+
+        <!-- Total Supported Countries -->
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-4">Total Supported Countries</h2>
+            <p class="text-xl font-medium text-gray-600">
+                181
+            </p>
+        </div>
+
+<!-- Supported Countries -->
+<div class="mb-12">
+    <h2 class="text-3xl font-semibold text-gray-800 text-center mb-6">
+        Supported Countries
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">AF</span> - Afghanistan
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">AL</span> - Albania
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">AI</span> - Anguilla
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">AQ</span> - Antarctica
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">AM</span> - Armenia
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">AD</span> - Andorra
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">AG</span> - Antigua and Barbuda
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">AW</span> - Aruba
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">BS</span> - Bahamas
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">BB</span> - Barbados
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">BY</span> - Belarus
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">BZ</span> - Belize
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">BJ</span> - Benin
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">BA</span> - Bosnia and Herzegovina
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">BW</span> - Botswana
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">BN</span> - Brunei Darussalam
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">CV</span> - Cabo Verde
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">CF</span> - Central African Republic
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">TD</span> - Chad
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">KM</span> - Comoros
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">CG</span> - Congo
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">CD</span> - Congo, Democratic Republic of the
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">CR</span> - Costa Rica
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">HR</span> - Croatia
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">CU</span> - Cuba
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">CY</span> - Cyprus
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">CZ</span> - Czechia
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">DJ</span> - Djibouti
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">DM</span> - Dominica
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">DO</span> - Dominican Republic
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">EC</span> - Ecuador
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">SV</span> - El Salvador
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">ER</span> - Eritrea
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">EE</span> - Estonia
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">SZ</span> - Eswatini
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">FJ</span> - Fiji
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">GA</span> - Gabon
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">GM</span> - Gambia
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">GN</span> - Guinea
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">GW</span> - Guinea-Bissau
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">GY</span> - Guyana
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">HT</span> - Haiti
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">HU</span> - Hungary
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">JM</span> - Jamaica
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">KI</span> - Kiribati
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">KW</span> - Kuwait
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">KG</span> - Kyrgyzstan
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">LA</span> - Lao People's Democratic Republic
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">LV</span> - Latvia
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">LS</span> - Lesotho
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">LR</span> - Liberia
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">LI</span> - Liechtenstein
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">LT</span> - Lithuania
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">LU</span> - Luxembourg
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">MG</span> - Madagascar
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">MW</span> - Malawi
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">ML</span> - Mali
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">MT</span> - Malta
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">MH</span> - Marshall Islands
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">FM</span> - Micronesia, Federated States of
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">MD</span> - Moldova, Republic of
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">MN</span> - Mongolia
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">MZ</span> - Mozambique
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">NA</span> - Namibia
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">NI</span> - Nicaragua
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">PW</span> - Palau
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">PG</span> - Papua New Guinea
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">PY</span> - Paraguay
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">RW</span> - Rwanda
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">KN</span> - Saint Kitts and Nevis
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">LC</span> - Saint Lucia
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">VC</span> - Saint Vincent and the Grenadines
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">WS</span> - Samoa
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">SC</span> - Seychelles
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">SO</span> - Somalia
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">SR</span> - Suriname
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">SY</span> - Syrian Arab Republic
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">TJ</span> - Tajikistan
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">TL</span> - Timor-Leste
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">TG</span> - Togo
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">TO</span> - Tonga
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">TM</span> - Turkmenistan
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">TV</span> - Tuvalu
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">UZ</span> - Uzbekistan
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">VU</span> - Vanuatu
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">ZM</span> - Zambia
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+            <span class="font-semibold text-blue-600">ZW</span> - Zimbabwe
+        </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">AI</span> - Anguilla
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">AQ</span> - Antarctica
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">AM</span> - Armenia
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">AR</span> - Argentina
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">AU</span> - Australia
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">AT</span> - Austria
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">AZ</span> - Azerbaijan
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">BD</span> - Bangladesh
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">BH</span> - Bahrain
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">BE</span> - Belgium
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">BM</span> - Bermuda
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">BT</span> - Bhutan
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">BO</span> - Bolivia
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">BR</span> - Brazil
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">BG</span> - Bulgaria
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">CA</span> - Canada
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">KH</span> - Cambodia
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">CM</span> - Cameroon
+                </div>
+				 <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">MC</span> - Monaco
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">CL</span> - Chile
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">CN</span> - China
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">CO</span> - Colombia
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">CZ</span> - Czechia
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">DK</span> - Denmark
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">DZ</span> - Algeria
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">EG</span> - Egypt
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">FI</span> - Finland
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">FR</span> - France
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">GE</span> - Georgia
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">DE</span> - Germany
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">GH</span> - Ghana
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">GR</span> - Greece
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">GL</span> - Greenland
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">GT</span> - Guatemala
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">HK</span> - Hong Kong
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">IS</span> - Iceland
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">IN</span> - India
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">ID</span> - Indonesia
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">IQ</span> - Iraq
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">IE</span> - Ireland
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">IL</span> - Israel
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">IT</span> - Italy
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">JP</span> - Japan
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">JO</span> - Jordan
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">KZ</span> - Kazakhstan
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">KE</span> - Kenya
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">KR</span> - South Korea
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">LB</span> - Lebanon
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">LK</span> - Sri Lanka
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">MA</span> - Morocco
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">SL</span> - Sierra Leone
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">MY</span> - Malaysia
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">MX</span> - Mexico
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">MM</span> - Myanmar
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">MV</span> - Maldives
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">MR</span> - Mauritania
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">NE</span> - Niger
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">NG</span> - Nigeria
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">NO</span> - Norway
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">NP</span> - Nepal
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">NZ</span> - New Zealand
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">OM</span> - Oman
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">PK</span> - Pakistan
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">PA</span> - Panama
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">PE</span> - Peru
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">PH</span> - Philippines
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">PL</span> - Poland
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">PT</span> - Portugal
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">QA</span> - Qatar
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">RO</span> - Romania
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">RU</span> - Russia
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">SA</span> - Saudi Arabia
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">SG</span> - Singapore
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">ZA</span> - South Africa
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">ES</span> - Spain
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">SD</span> - Sudan
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">SE</span> - Sweden
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">CH</span> - Switzerland
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">TW</span> - Taiwan
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">TZ</span> - Tanzania
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">TH</span> - Thailand
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">TR</span> - Turkiye
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">UG</span> - Uganda
+                </div>
+				<div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">LL</span> - Liberland
+                </div>
+				<div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">AZW</span> - Azawad
+                </div>
+				<div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">SADR</span> - Western Sahara
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">UA</span> - Ukraine
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">AE</span> - United Arab Emirates
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">GB</span> - United Kingdom
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">US</span> - United States
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">VE</span> - Venezuela
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">VN</span> - Vietnam
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">YE</span> - Yemen
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">PMR</span> - Transnistria
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">NKR</span> - Nagorno-Karabakh
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">RA</span> - Abkhazia
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">RSO</span> - South Ossetia
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">SLD</span> - Somaliland
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">TRNC</span> - Northern Cyprus
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">AZW</span> - Azawad
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">LL</span> - Liberland
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">SADR</span> - Western Sahara
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">PS</span> - Sealand
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <span class="font-semibold text-blue-600">SM</span> - San Marino
+                </div>
+            </div>
+        </div>
+
+        <!-- API Owner -->
+        <div class="flex justify-center items-center mb-12">
+            <p class="text-xl font-semibold text-gray-700">
+                API Owner <a href="https://t.me/TheSmartDev" class="text-blue-600">@TheSmartDev</a>
+            </p>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram Icon" class="telegram-icon ml-2">
+        </div>
+
+        <!-- Promotional Footer -->
+        <div class="text-center bg-gray-100 py-6 rounded-lg">
+            <p class="text-lg font-medium text-gray-700">
+                Want Custom APIs Or Bots Custom?<br>
+                Python Php And NodeJS All Available<br>
+                To Buy Or Make DM
+                <a href="https://t.me/ISmartCoder" class="text-blue-600">@ISmartCoder</a>
+                <img src="https://kurigram.live/assets/pyro.gif" alt="Pyro GIF" class="w-8 h-8 inline-block ml-2">
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Check API status
+        async function checkApiStatus() {
+            const statusElement = document.getElementById('api-status');
+            try {
+                const response = await fetch('/api/address?code=bd');
+                if (response.ok) {
+                    statusElement.textContent = 'Live';
+                    statusElement.classList.add('text-green-600');
+                } else {
+                    statusElement.textContent = 'Dead';
+                    statusElement.classList.add('text-red-600');
+                }
+            } catch (error) {
+                statusElement.textContent = 'Dead';
+                statusElement.classList.add('text-red-600');
+            }
+        }
+
+        // Generate random address
+        async function generateAddress() {
+            const countrySelect = document.getElementById('country-select');
+            const addressOutput = document.getElementById('address-output');
+            const countryCode = countrySelect.value;
+
+            if (!countryCode) {
+                addressOutput.textContent = 'Please select a country.';
+                addressOutput.classList.add('text-red-600');
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/address?code=${countryCode}`);
+                if (response.ok) {
+                    const address = await response.json();
+                    addressOutput.textContent = JSON.stringify(address, null, 2);
+                    addressOutput.classList.remove('text-red-600');
+                    addressOutput.classList.add('text-gray-700');
+                } else {
+                    const error = await response.json();
+                    addressOutput.textContent = `Error: ${error.error}`;
+                    addressOutput.classList.add('text-red-600');
+                }
+            } catch (error) {
+                addressOutput.textContent = `Error: Failed to fetch address`;
+                addressOutput.classList.add('text-red-600');
+            }
+        }
+
+        // Event listener for generate button
+        document.getElementById('generate-btn').addEventListener('click', generateAddress);
+
+        // Run API status check on page load
+        window.onload = checkApiStatus;
+    </script>
+</body>
+</html>
